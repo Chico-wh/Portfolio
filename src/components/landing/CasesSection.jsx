@@ -204,7 +204,7 @@ export default function CasesSection() {
   fetch("https://api.github.com/users/Chico-wh/repos?sort=updated&per_page=20")
     .then((r) => r.json())
     .then((data) => {
-      const hiddenRepos = ["portfolio", "my-portfolio"];
+      const hiddenRepos = ["portfolio", "my-portfolio","chico-wh","Chico-wh"];
 
       const filtered = Array.isArray(data)
         ? data

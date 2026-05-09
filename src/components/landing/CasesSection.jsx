@@ -200,18 +200,24 @@ export default function CasesSection() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const headlineX = useTransform(scrollYProgress, [0, 1], ['2%', '-2%']);
 
-  useEffect(() => {
-    fetch('https://api.github.com/users/Chico-wh/repos?sort=updated&per_page=20')
-      .then(r => r.json())
-      .then(data => {
-        const filtered = Array.isArray(data)
-          ? data.filter(r => !r.fork).slice(0, 6)
-          : [];
-        setRepos(filtered);
-      })
-      .catch(() => setRepos([]))
-      .finally(() => setLoading(false));
-  }, []);
+ useEffect(() => {
+  fetch("https://api.github.com/users/Chico-wh/repos?sort=updated&per_page=20")
+    .then((r) => r.json())
+    .then((data) => {
+      const hiddenRepos = ["portfolio", "my-portfolio"];
+
+      const filtered = Array.isArray(data)
+        ? data
+            .filter((repo) => !repo.fork)
+            .filter((repo) => !hiddenRepos.includes(repo.name.toLowerCase()))
+            .slice(0, 6)
+        : [];
+
+      setRepos(filtered);
+    })
+    .catch(() => setRepos([]))
+    .finally(() => setLoading(false));
+}, []);
 
   return (
     <section id="projetos" ref={ref} className="relative bg-[#070b0a] overflow-hidden">

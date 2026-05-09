@@ -218,7 +218,7 @@ export default function CasesSection() {
     .catch(() => setRepos([]))
     .finally(() => setLoading(false));
 }, []);
-}
+
 
 
   return (

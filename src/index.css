@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: 'Inter', sans-serif;
+    --background: 0 0% 97%;
+    --foreground: 0 0% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 4%;
+    --primary: 2 100% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 0 0% 97%;
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 97%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 87%;
+    --input: 0 0% 87%;
+    --ring: 2 100% 59%;
+    --radius: 0.4rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-[#070707] text-[#F7F3EA] font-inter antialiased; }
+  html { scroll-behavior: smooth; }
+}
+
+/* ── Ticker ─────────────────────────────────────── */
+@keyframes ticker-move {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ticker-run { animation: ticker-move 32s linear infinite; }
+.ticker-root:hover .ticker-run { animation-play-state: paused; }
+
+/* ── Float / drift ───────────────────────────────── */
+@keyframes drift {
+  0%,100% { transform: translate(0,0) rotate(0deg); }
+  25%      { transform: translate(18px,-28px) rotate(1.5deg); }
+  75%      { transform: translate(-12px,18px) rotate(-1deg); }
+}
+.drift  { animation: drift 16s ease-in-out infinite; }
+.drift2 { animation: drift 21s ease-in-out 4s infinite reverse; }
+.drift3 { animation: drift 26s ease-in-out 9s infinite; }
+
+/* ── Shimmer CTA ─────────────────────────────────── */
+@keyframes cta-shimmer {
+  0%   { transform: translateX(-150%) skewX(-15deg); }
+  100% { transform: translateX(250%)  skewX(-15deg); }
+}
+.cta-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+  animation: cta-shimmer 2.8s ease-in-out infinite;
+}
+
+/* ── Count up numbers ─────────────────────────────── */
+@keyframes num-in {
+  from { opacity:0; transform:translateY(20px) scale(0.94); }
+  to   { opacity:1; transform:translateY(0)    scale(1); }
+}
+.num-in { animation: num-in 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
+
+/* ── Grain ─────────────────────────────────────────── */
+.has-grain::before {
+  content:'';
+  position:absolute; inset:0; z-index:2;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.055'/%3E%3C/svg%3E");
+  pointer-events:none; mix-blend-mode:overlay;
+}
+
+/* ── Scrollbar ────────────────────────────────────── */
+::-webkit-scrollbar        { width:3px; }
+::-webkit-scrollbar-track  { background:#070707; }
+::-webkit-scrollbar-thumb  { background:#2a2a2a; border-radius:2px; }
+::-webkit-scrollbar-thumb:hover { background:#FF3B30; }
+
+/* ── Selection ─────────────────────────────────────── */
+::selection { background:#FF3B30; color:#fff; }

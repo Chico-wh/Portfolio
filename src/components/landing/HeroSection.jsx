@@ -23,20 +23,25 @@ function useGitHubRepos(username) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`)
-      .then(r => r.json())
-      .then(data => {
-        const filtered = Array.isArray(data)
-          ? data.filter(r => !r.fork).slice(0, 4)
-          : [];
-        setRepos(filtered);
-      })
-      .catch(() => setRepos([]))
-      .finally(() => setLoading(false));
-  }, [username]);
+  fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=10`)
+    .then(r => r.json())
+    .then(data => {
+      const hiddenRepos = ["Portfolio", "my-Portfolio","Chico-wh","chico-wh"];
 
-  return { repos, loading };
-}
+      const filtered = Array.isArray(data)
+        ? data
+            .filter(repo => !repo.fork)
+            .filter(repo => !hiddenRepos.includes(repo.name))
+            .slice(0, 4)
+        : [];
+
+      setRepos(filtered);
+    })
+    .catch(() => setRepos([]))
+    .finally(() => setLoading(false));
+}, [username]);
+
+return { repos, loading };
 
 const LANG_COLOR = {
   JavaScript: '#F7DF1E',

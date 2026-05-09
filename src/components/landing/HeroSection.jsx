@@ -22,7 +22,7 @@ function useGitHubRepos(username) {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+useEffect(() => {
   fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=10`)
     .then(r => r.json())
     .then(data => {
@@ -42,6 +42,7 @@ function useGitHubRepos(username) {
 }, [username]);
 
 return { repos, loading };
+}
 
 const LANG_COLOR = {
   JavaScript: '#F7DF1E',

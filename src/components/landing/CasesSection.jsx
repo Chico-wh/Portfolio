@@ -218,6 +218,8 @@ export default function CasesSection() {
     .catch(() => setRepos([]))
     .finally(() => setLoading(false));
 }, []);
+}
+
 
   return (
     <section id="projetos" ref={ref} className="relative bg-[#070b0a] overflow-hidden">

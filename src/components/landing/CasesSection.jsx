@@ -75,7 +75,10 @@ const PROJECTS = [
     url: 'https://personal-odonto-one.vercel.app/',
     urlLabel: 'personal-odonto-one.vercel.app',
 
-    media: null,
+    media: {
+      type: 'image',
+      src: '/Portfolio/projects/image.png',
+    },
 
     description:
       'Site que desenvolvi para uma clínica odontológica: apresenta a clínica e os tratamentos e leva o paciente direto para o contato e o agendamento, com layout leve e responsivo.',
